@@ -1,0 +1,8 @@
+CREATE PROCEDURE DeleteNote
+    @Id INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM Notes WHERE Id = @Id;
+END
