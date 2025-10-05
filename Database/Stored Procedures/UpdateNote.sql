@@ -1,14 +1,16 @@
 CREATE PROCEDURE UpdateNote
-    @Id INT,
-    @Title NVARCHAR(200),
-    @Content NVARCHAR(MAX)
+    @id INT,
+    @title NVARCHAR(200),
+    @content NVARCHAR(MAX)
 AS
 BEGIN
     SET NOCOUNT ON;
 
     UPDATE Notes
-    SET Title = @Title,
-        Content = @Content,
+    SET Title = @title,
+        Content = @content,
         UpdatedAt = GETUTCDATE()
-    WHERE Id = @Id;
+    WHERE Id = @id;
+
+    SELECT CAST(@@ROWCOUNT AS INT) AS Result;
 END

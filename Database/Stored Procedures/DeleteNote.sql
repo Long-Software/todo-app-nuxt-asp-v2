@@ -1,8 +1,10 @@
 CREATE PROCEDURE DeleteNote
-    @Id INT
+    @id INT
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    DELETE FROM Notes WHERE Id = @Id;
+    DELETE FROM Notes WHERE Id = @id;
+
+    SELECT CAST(@@ROWCOUNT AS INT) AS Result;
 END

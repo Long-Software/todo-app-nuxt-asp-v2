@@ -1,10 +1,10 @@
 CREATE PROCEDURE GetNote
-    @Id INT
+    @id INT
 AS
 BEGIN
     SET NOCOUNT ON;
 
     SELECT Id, Title, Content, CreatedAt, UpdatedAt
     FROM Notes
-    WHERE Id = @Id;
+    WHERE Id = @id;
 END

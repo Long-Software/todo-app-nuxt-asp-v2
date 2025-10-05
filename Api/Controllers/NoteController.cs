@@ -1,4 +1,6 @@
 using Api.Models;
+using Api.Models.Response;
+using Api.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -7,12 +9,42 @@ namespace Api.Controllers;
 [ApiController]
 public class NoteController : ControllerBase
 {
-  public async Task<IActionResult> GetAllNotes()
+  private readonly INoteService _noteService;
+
+  public NoteController(INoteService noteService)
   {
-    return Ok();
+    _noteService = noteService;
   }
-  public async Task<IActionResult> GetNote()
+
+  [HttpGet]
+  public ApiResult<List<Note>> GetAllNotes()
   {
-    return Ok();
+    var notes = _noteService.GetAllNotes();
+    return ApiResult<List<Note>>.Success(notes);
+  }
+  [HttpGet]
+  [Route("{id:int}")]
+  public ApiResult<Note> GetNote(int id)
+  {
+    return ApiResult<Note>.Success(new Note());
+  }
+
+  [HttpPost]
+  public ApiResult CreateNote(CreateNoteRequest req)
+  {
+    return ApiResult.Success();
+  }
+
+  [Route("{id:int}")]
+  [HttpPatch]
+  public ApiResult UpdateNote(UpdateNoteRequest req)
+  {
+    return ApiResult.Success();
+  }
+  [Route("{id:int}")]
+  [HttpDelete]
+  public ApiResult DeleteNote(int id)
+  {
+    return ApiResult.Success();
   }
 }

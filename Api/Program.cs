@@ -1,3 +1,6 @@
+using Api.Repository;
+using Api.Services;
+using Api.Services.Interface;
 using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,9 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-var app = builder.Build();
+builder.Services.AddScoped<NoteRepository>();
+builder.Services.AddScoped<INoteService, NoteService>();
 
 builder.Services.AddCors(options =>
 {
@@ -30,18 +32,22 @@ builder.Services.AddControllers(options =>
     c.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
 });
 
+
 builder.Services.AddControllers();
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
+app.MapControllers();
 app.UseHttpsRedirection();
 app.Run();
 

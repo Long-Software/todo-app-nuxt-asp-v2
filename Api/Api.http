@@ -1,6 +1,5 @@
-@Api_HostAddress = http://localhost:5284
+### Get all note
 
-GET {{Api_HostAddress}}/weatherforecast/
-Accept: application/json
+GET {{api_url}}/note
 
 ###

@@ -1,12 +1,11 @@
 CREATE PROCEDURE InsertNote
-    @Title NVARCHAR(200),
-    @Content NVARCHAR(MAX)
+    @Title NVARCHAR(200)
 AS
 BEGIN
     SET NOCOUNT ON;
 
     INSERT INTO Notes (Title, Content, CreatedAt, UpdatedAt)
-    VALUES (@Title, @Content, GETUTCDATE(), GETUTCDATE());
+    VALUES (@Title, '', GETUTCDATE(), GETUTCDATE());
 
-    SELECT SCOPE_IDENTITY() AS NewId;
+    SELECT CAST(SCOPE_IDENTITY() AS INT) AS Result;
 END

@@ -35,8 +35,20 @@ public abstract class BaseRepository
     }
     catch (Exception e)
     {
-      // TODO: Implement add error logging here
-      _logger.LogError("");
+      _logger.LogError($"StoredProcedure:'{storedProcedure}', Param:{param}, ErrorCode:'{e.HResult}', ErrorMessage:'{e.Message}'");
+    }
+    return result;
+  }
+  public int ExecuteScalar(string storedProcedure, object param = null)
+  {
+    int result = 0;
+    try
+    {
+      result = _dapperBase.ExecuteScalar(storedProcedure, param);
+    }
+    catch (Exception e)
+    {
+      _logger.LogError($"StoredProcedure:'{storedProcedure}', Param:{param}, ErrorCode:'{e.HResult}', ErrorMessage:'{e.Message}'");
     }
     return result;
   }
