@@ -7,11 +7,9 @@ namespace Api.Repository;
 
 public class DapperRepositoryBase(string connectionString)
 {
-  private readonly string _connectionString = connectionString;
-
   private DbConnection CreateConnection()
   {
-    return new SqlConnection(_connectionString);
+    return new SqlConnection(connectionString);
   }
 
   public IEnumerable<T> Query<T>(string storedProcedure, object param = null)

@@ -9,42 +9,45 @@ namespace Api.Controllers;
 [ApiController]
 public class NoteController : ControllerBase
 {
-  private readonly INoteService _noteService;
+    private readonly INoteService _noteService;
 
-  public NoteController(INoteService noteService)
-  {
-    _noteService = noteService;
-  }
+    public NoteController(INoteService noteService)
+    {
+        _noteService = noteService;
+    }
 
-  [HttpGet]
-  public ApiResult<List<Note>> GetAllNotes()
-  {
-    var notes = _noteService.GetAllNotes();
-    return ApiResult<List<Note>>.Success(notes);
-  }
-  [HttpGet]
-  [Route("{id:int}")]
-  public ApiResult<Note> GetNote(int id)
-  {
-    return ApiResult<Note>.Success(new Note());
-  }
+    [HttpGet]
+    public ApiResult<List<Note>> GetAllNotes()
+    {
+        var notes = _noteService.GetAllNotes();
+        return notes;
+    }
 
-  [HttpPost]
-  public ApiResult CreateNote(CreateNoteRequest req)
-  {
-    return ApiResult.Success();
-  }
+    [HttpGet]
+    [Route("{id:int}")]
+    public ApiResult<Note> GetNote(int id)
+    {
+        return _noteService.GetNote(id);
+    }
 
-  [Route("{id:int}")]
-  [HttpPatch]
-  public ApiResult UpdateNote(UpdateNoteRequest req)
-  {
-    return ApiResult.Success();
-  }
-  [Route("{id:int}")]
-  [HttpDelete]
-  public ApiResult DeleteNote(int id)
-  {
-    return ApiResult.Success();
-  }
+    [HttpPost]
+    public ApiResult CreateNote(CreateNoteRequest req)
+    {
+        return _noteService.CreateNote(req);
+    }
+
+    [Route("{id:int}")]
+    [HttpPatch] 
+    public ApiResult UpdateNote(int id, UpdateNoteRequest req)
+    {
+        req.Id = id;
+        return _noteService.UpdateNote(req);
+    }
+
+    [Route("{id:int}")]
+    [HttpDelete]
+    public ApiResult DeleteNote(int id)
+    {
+        return _noteService.DeleteNote(id);
+    }
 }

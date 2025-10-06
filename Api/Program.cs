@@ -7,10 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// Add services to the container.
-builder.Services.AddScoped<NoteRepository>();
-builder.Services.AddScoped<INoteService, NoteService>();
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("DynamicCorsPolicy", policy =>
@@ -34,6 +30,10 @@ builder.Services.AddControllers(options =>
 
 
 builder.Services.AddControllers();
+
+// Add services to the container.
+builder.Services.AddScoped<NoteRepository>();
+builder.Services.AddScoped<INoteService, NoteService>();
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();

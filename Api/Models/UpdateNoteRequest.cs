@@ -5,7 +5,6 @@ namespace Api.Models;
 
 public class UpdateNoteRequest
 {
-  [Required]
   public int Id { get; set; }
   [Required]
   [MinLength(1)]
