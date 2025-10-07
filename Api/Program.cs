@@ -9,24 +9,26 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("DynamicCorsPolicy", policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
         policy
-            .AllowAnyOrigin()
+            .WithOrigins("http://localhost:3000")
+            // .AllowAnyOrigin()
+            .AllowCredentials()
             .AllowAnyMethod()
             .AllowAnyHeader();
     });
 });
 
 builder.Services.AddControllers(options =>
-{
-    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-})
-.AddNewtonsoftJson(c =>
-{
-    c.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
-    c.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-});
+    {
+        options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+    })
+    .AddNewtonsoftJson(c =>
+    {
+        c.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
+        c.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+    });
 
 
 builder.Services.AddControllers();
@@ -47,7 +49,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
 app.MapControllers();
+app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.Run();
-
