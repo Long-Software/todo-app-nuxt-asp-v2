@@ -18,7 +18,6 @@ const api = axios.create({
 export const fetchNotes = async () => {
   try {
     const res = await api.get<ApiResponse<Note[]>>("/note");
-    console.log("data: ", res.data.Data);
     return res.data.Data;
   } catch (error) {
     return [];

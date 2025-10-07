@@ -1,5 +1,5 @@
 <template>
-  <div class="dark w-1/2 h-[75vh] flex mx-auto gap-10">
+  <div class="w-1/2 flex mx-auto gap-10">
     <div class="w-full">
       <EditNoteCard
         v-if="notesStore.notes.length > 0 && notesStore.selectedId != 0"
@@ -41,28 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useNotesStore } from "~/store/note";
-
-const notesStore = useNotesStore();
-
-onMounted(() => {
-  notesStore.loadNotes();
-});
-const removeNote = (id: number) => {
-  notesStore.removeNote(id);
-};
-const selectNote = (id: number) => {
-  notesStore.selectNote(id);
-};
-
-const selectedNote = computed(() => {
-  return (
-    notesStore.notes.find((n) => n.Id === notesStore.selectedId) || undefined
-  );
-});
-
-const onCancel = () => {
-  notesStore.selectNote(0);
-};
+import { useNotes } from "~/composables/useNote";
+const { notesStore, onCancel, removeNote, selectNote, selectedNote } =
+  useNotes();
 </script>
