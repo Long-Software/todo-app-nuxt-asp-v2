@@ -32,7 +32,10 @@
         >
           Cancel
         </button>
-        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+        <button
+          type="submit"
+          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
           Save
         </button>
       </div>
@@ -41,24 +44,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import type { Note } from '~/models/note';
-import { useNotesStore } from '~/store/note';
+import { ref } from "vue";
+import type { Note } from "~/models/note";
+import { useNotesStore } from "~/store/note";
 
 const props = defineProps<{
-  note?: Note
-}>()
+  note?: Note;
+}>();
 
 const emit = defineEmits<{
-  (e: 'cancel'): void
-}>()
+  (e: "cancel"): void;
+}>();
 
-const store = useNotesStore()
+const store = useNotesStore();
 
-const title = ref(props.note?.Title)
-const content = ref(props.note?.Content)
+const title = ref(props.note?.Title);
+const content = ref(props.note?.Content);
 
-async function saveNote() {
-  await store.editNote(store.selectedId, title.value ?? '', content.value ?? '')
-}
+const saveNote = async () => {
+  await store.editNote(
+    store.selectedId,
+    title.value ?? "",
+    content.value ?? ""
+  );
+};
 </script>

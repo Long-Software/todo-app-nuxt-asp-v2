@@ -16,12 +16,12 @@ export const useNotesStore = defineStore("notes", {
     async loadNotes() {
       this.notes = await fetchNotes();
     },
-    async addNote(title: string) {
-      await createNote({ title });
+    async addNote(Title: string) {
+      await createNote({ Title });
       await this.loadNotes();
     },
-    async editNote(id: number, title: string, content: string) {
-      await updateNote(id, { title, content });
+    async editNote(id: number, Title: string, Content: string) {
+      await updateNote(id, { Title, Content });
       await this.loadNotes();
     },
     async removeNote(id: number) {

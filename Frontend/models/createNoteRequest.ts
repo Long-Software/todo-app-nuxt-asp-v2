@@ -1,3 +1,3 @@
 export type CreateNoteRequest = {
-  title: string;
+  Title: string;
 };

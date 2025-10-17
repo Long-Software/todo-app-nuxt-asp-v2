@@ -1,4 +1,4 @@
 export type UpdateNoteRequest = {
-  title: string;
-  content: string;
+  Title: string;
+  Content: string;
 };

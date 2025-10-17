@@ -35,14 +35,14 @@ Accept: application/json
 
 {
   "Title": "Come home",
-  "Content": "No way"
+  "Content": ""
 }
 
 ###
 
 ### Post Delete note
 
-DELETE {{api_url}}/note/1
+DELETE {{api_url}}/note/2
 Content-Type: application/json
 Accept: application/json
 # Authorization: Bearer {{token}}

@@ -1,7 +1,7 @@
 import { computed, onMounted } from "vue";
 import { useNotesStore } from "~/store/note";
 
-export function useNotes() {
+export const useNotes = () => {
   const notesStore = useNotesStore();
 
   onMounted(() => {
@@ -31,4 +31,4 @@ export function useNotes() {
     onCancel,
     selectedNote,
   };
-}
+};

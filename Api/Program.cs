@@ -1,7 +1,6 @@
 using Api.Repository;
 using Api.Services;
 using Api.Services.Interface;
-using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +12,6 @@ builder.Services.AddCors(options =>
     {
         policy
             .WithOrigins("http://localhost:3000")
-            // .AllowAnyOrigin()
             .AllowCredentials()
             .AllowAnyMethod()
             .AllowAnyHeader();
@@ -21,15 +19,13 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllers(options =>
-    {
-        options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-    })
-    .AddNewtonsoftJson(c =>
-    {
-        c.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
-        c.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-    });
-
+{
+    // options.Filters.Add(typeof(LogFilter));
+    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+}).AddNewtonsoftJson(c =>
+{
+    c.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
+});
 
 builder.Services.AddControllers();
 
@@ -37,17 +33,18 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<NoteRepository>();
 builder.Services.AddScoped<INoteService, NoteService>();
 
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
 }
 
 app.MapControllers();
