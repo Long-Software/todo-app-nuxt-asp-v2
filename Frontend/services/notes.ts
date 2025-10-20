@@ -1,7 +1,7 @@
-const API_URL = "http://localhost:5284/api";
+const API_URL = "http://localhost:5276/api";
 
 import axios from "axios";
-import type { ApiResponse } from "~/models/ApiReponse";
+import type { ApiResponse } from "~/models/ApiResponse";
 import type { CreateNoteRequest } from "~/models/createNoteRequest";
 import type { Note } from "~/models/note";
 import type { UpdateNoteRequest } from "~/models/updateNoteRequest";
@@ -13,6 +13,7 @@ const api = axios.create({
     "Content-Type": "application/json",
     Accept: "application/json",
   },
+  validateStatus: (_) => true,
 });
 
 export const fetchNotes = async () => {

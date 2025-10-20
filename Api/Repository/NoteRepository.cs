@@ -13,12 +13,12 @@ public class NoteRepository : BaseRepository
 
     public List<Note> GetAllNotes()
     {
-        return GetData<Note>("GetAllNotes").ToList();
+        return GetData<Note>("GetAllNotes_2_0_0").ToList();
     }
 
     public Note? GetNote(int id)
     {
-        return GetData<Note>("GetNote", new { id }).FirstOrDefault();
+        return GetData<Note>("GetNote_2_0_0", new { id }).FirstOrDefault();
     }
 
     public int CreateNote(CreateNoteRequest req)

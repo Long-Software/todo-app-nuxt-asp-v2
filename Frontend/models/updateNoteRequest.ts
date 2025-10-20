@@ -1,4 +1,4 @@
-export type UpdateNoteRequest = {
+export interface UpdateNoteRequest {
   Title: string;
   Content: string;
-};
+}

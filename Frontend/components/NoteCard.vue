@@ -2,16 +2,9 @@
   <div class="border-l-4 border-s-emerald-200 rounded-md p-2 flex flex-row">
     <div class="w-full" @click="selectNote">
       <h2 class="font-bold text-lg mb-2">{{ note.Title }}</h2>
-      <p class="text-xs text-gray-400">
-        Updated: {{ formatDate(note.UpdatedAt) }}
-      </p>
+      <p class="text-xs">Updated: {{ formatDate(note.UpdatedAt) }}</p>
     </div>
-    <button
-      @click="deleteNote"
-      class="mt-2 bg-red-500 w-fit text-white px-3 py-1 rounded-xl hover:bg-red-600"
-    >
-      Delete
-    </button>
+    <el-button type="danger" :onclick="deleteNote">Danger</el-button>
   </div>
 </template>
 

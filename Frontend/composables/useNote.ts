@@ -3,7 +3,8 @@ import { useNotesStore } from "~/store/note";
 
 export const useNotes = () => {
   const notesStore = useNotesStore();
-
+ const { showAlert } = useAlert()
+ 
   onMounted(() => {
     notesStore.loadNotes();
   });

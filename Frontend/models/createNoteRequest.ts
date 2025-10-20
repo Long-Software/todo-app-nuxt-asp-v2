@@ -1,3 +1,3 @@
-export type CreateNoteRequest = {
+export interface CreateNoteRequest {
   Title: string;
-};
+}

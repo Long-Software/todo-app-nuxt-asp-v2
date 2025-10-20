@@ -1,7 +1,0 @@
-{
-  "rest-client.environmentVariables": {
-    "$shared": {
-      "api_url": "http://localhost:5284/api"
-    }
-  }
-}
